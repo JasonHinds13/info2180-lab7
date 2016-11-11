@@ -10,6 +10,7 @@ function search(query){
     $.ajax(link,{
         method: 'GET',
     }).done(function(res){
+        alert($(res).text());
         $("#result").html(res);
     }).fail(function(fail){
         $("#result").html('<b>EPIC FAIL 500 - AJAX ERROR!</b>');
