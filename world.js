@@ -1,7 +1,12 @@
 $(document).ready(function(){
     
     $("#lookup").on('click', function(){
-        search($("#country").val());
+        if($("#check").is(":checked")){
+            searchAll();
+        }
+        else if ($("#country").val() != ""){
+            search($("#country").val());
+        }
     });
 });
 
@@ -11,6 +16,18 @@ function search(query){
         method: 'GET',
     }).done(function(res){
         alert($(res).text());
+        $("#result").html(res);
+    }).fail(function(fail){
+        $("#result").html('<b>EPIC FAIL 500 - AJAX ERROR!</b>');
+    });
+}
+
+function searchAll(){
+    var link = 'https://info2180-lab7-jasonhinds13.c9users.io/world.php?all=true';
+    
+    $.ajax(link,{
+        method: 'GET',
+    }).done(function(res){
         $("#result").html(res);
     }).fail(function(fail){
         $("#result").html('<b>EPIC FAIL 500 - AJAX ERROR!</b>');
